@@ -1,0 +1,13 @@
+import requests
+from bs4 import BeautifulSoup
+
+r = requests.get("https://agro.av.by/")
+r.encoding = 'win-1252'
+bs = BeautifulSoup(r.text,"html.parser")
+
+all_links = bs.find_all("div", class_ = "listing-item-body")
+for link in all_links:
+  link1=link.find("a")
+  link2=link.find("strong")
+  if link1 != None and link2!=None:
+    print(link1.text," \n", link2.text,"\n", link1["href"],"\n\n")
